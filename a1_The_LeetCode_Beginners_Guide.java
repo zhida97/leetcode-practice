@@ -224,5 +224,118 @@ public class a1_The_LeetCode_Beginners_Guide {
         // Return true if manage to reach here
         return true;
     }
+
+    // 8 - 9. Palindrome Number
+    // Given an integer x, return true if x is palindrome integer.
+    // An integer is a palindrome when it reads the same backward as forward.
+    // For example, 121 is a palindrome while 123 is not.
+    public boolean isPalindrome(int x) {
+
+        // negative will not be a palindrome for sure
+        // if the last digit is 0, it can't be reversed unless it is exactly 0
+        if(x < 0 || x % 10 == 0 && x != 0){
+            return false;
+        }
+
+        // Declare the reverted number
+        int revertedNumber = 0;
+
+        // when the original number is less than the reversed number, it means we've processed half of the number digits.
+        while(revertedNumber < x){
+
+            // Taking the current number position, times 10 + the remainder of x % 10
+            revertedNumber = revertedNumber * 10 + x % 10;
+
+            // Shift down the x as well
+            x = x / 10;
+        }
+
+        // True if one of the following occur, if the length of digit is
+        // even, revertedNumber == x
+        // odd, revertedNumber / 10(this will be bigger when the loop ends) == x, the middle for the odd will be the same always
+        return revertedNumber == x || revertedNumber / 10 == x;
+    }
+
+    // 9 - 13. Roman to Integer
+    // Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+    // Symbol       Value
+    // I             1
+    // V             5
+    // X             10
+    // L             50
+    // C             100
+    // D             500
+    // M             1000
+    // Given a roman numeral, convert it to an integer.
+    public int romanToInt(String s) {
+
+        // Initialize the integer answer
+        int answer = 0;
+
+        // Loop each character in the string and increase the answer accordingly
+        for (int i = 0; i < s.length(); i++){
+
+            char curChar = s.charAt(i);
+
+            if(curChar == 'I'){
+                answer += 1;
+            }
+
+            else if(curChar == 'V'){
+                answer += 5;
+            }
+
+            else if(curChar == 'X'){
+                answer += 10;
+            }
+
+            else if(curChar == 'L'){
+                answer += 50;
+            }
+
+            else if(curChar == 'C'){
+                answer += 100;
+            }
+
+            else if(curChar == 'D'){
+                answer += 500;
+            }
+
+            else if(curChar == 'M'){
+                answer += 1000;
+            }
+        }
+
+        // Decrease the number accordingly, but take note we're doubling the decrement because we added it on top
+        // There are six instances where subtraction is used:
+        // I can be placed before V (5) and X (10) to make 4 and 9.
+        // X can be placed before L (50) and C (100) to make 40 and 90.
+        // C can be placed before D (500) and M (1000) to make 400 and 900.
+        if(s.contains("IV")){
+            answer -= 2;
+        }
+
+        if(s.contains("IX")){
+            answer -= 2;
+        }
+
+        if(s.contains("XL")){
+            answer -= 20;
+        }
+
+        if(s.contains("XC")){
+            answer -= 20;
+        }
+
+        if(s.contains("CD")){
+            answer -= 200;
+        }
+
+        if(s.contains("CM")){
+            answer -= 200;
+        }
+
+        return answer;
+    }
 }
-}
+
