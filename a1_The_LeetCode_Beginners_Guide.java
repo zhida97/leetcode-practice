@@ -337,5 +337,31 @@ public class a1_The_LeetCode_Beginners_Guide {
 
         return answer;
     }
+
+    // 10 - 1. Two Sum
+    // Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+    // You may assume that each input would have exactly one solution, and you may not use the same element twice.
+    // You can return the answer in any order.
+    public int[] twoSum(int[] nums, int target) {
+
+        // Create an array which holds two integer
+        int[] answer = new int[2];
+
+        // Loop each number
+        for(int i = 0; i < nums.length-1; i++){
+
+            // Loop each number +1
+            for(int j = 1; j < nums.length; j++){
+
+                // If number and next number is the same and i cannot be the same as j, assign to the array and end
+                if(nums[i] + nums[j] == target && i != j){
+                    answer[0] = i;
+                    answer[1] = j;
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
 }
 
