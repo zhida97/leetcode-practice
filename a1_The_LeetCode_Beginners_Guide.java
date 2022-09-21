@@ -363,5 +363,51 @@ public class a1_The_LeetCode_Beginners_Guide {
         }
         return answer;
     }
+
+    // 11 - 20. Valid Parentheses
+    // Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+    // An input string is valid if:
+    // Open brackets must be closed by the same type of brackets.
+    // Open brackets must be closed in the correct order.
+    // Every close bracket has a corresponding open bracket of the same type.
+    public boolean isValid(String s) {
+
+        // The string length must be even number.
+        if(s.length() % 2 != 0){return false;}
+
+        // Create a stack to hold all open parentheses
+        Stack<Character> stack = new Stack<Character>();
+
+        // Loop all character in String
+        for (int i = 0; i < s.length(); i++){
+
+            // Store the current character in a var
+            char c = s.charAt(i);
+
+            // If it is a open parentheses, store it
+            if(c == '(' || c == ('{') || c == '['){
+                stack.push(c);
+            }
+
+            // Check each closing parentheses accordingly, if the stack is empty means the closing position is wrong, return false
+            else if(c == ')'){
+                if(stack.empty() || stack.pop() != '(')
+                    return false;
+            }
+
+            else if(c == '}'){
+                if(stack.empty() || stack.pop() != '{')
+                    return false;
+            }
+
+            else if(c == ']'){
+                if(stack.empty() || stack.pop() != '[')
+                    return false;
+            }
+        }
+
+        // If the stack is empty, means the string is valid
+        return stack.isEmpty();
+    }
 }
 
