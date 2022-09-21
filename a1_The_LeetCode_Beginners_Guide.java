@@ -409,5 +409,34 @@ public class a1_The_LeetCode_Beginners_Guide {
         // If the stack is empty, means the string is valid
         return stack.isEmpty();
     }
+
+    // 12 - 14. Longest Common Prefix
+    // Write a function to find the longest common prefix string amongst an array of strings.
+    // If there is no common prefix, return an empty string "".
+    public String longestCommonPrefix(String[] strs){
+
+        // If the array is null or the first string is empty, return ""
+        if(strs == null || strs[0].length() == 0){return "";}
+
+        // Loop each character in the first string
+        for(int i = 0; i < strs[0].length(); i++){
+
+            // Grab the current character
+            char c = strs[0].charAt(i);
+
+            // Loop each string in the array, start from the second string
+            for(int j = 1; j < strs.length; j++){
+
+                // If the current character == the length of current string,
+                // or if the current character doesn't match
+                // trim the string and don't need to check the character later, and don't need to check the remaining strings as well
+                // return with the trimmed result to prevent out of bounds exception
+                if(i == strs[j].length() || c != strs[j].charAt(i)){
+                    return strs[0].substring(0, i); // substring is (inclusive, exclusive)
+                }
+            }
+        }
+        return strs[0];
+    }
 }
 
